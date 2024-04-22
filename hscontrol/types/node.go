@@ -529,3 +529,12 @@ func (nodes Nodes) IDMap() map[NodeID]*Node {
 
 	return ret
 }
+
+func NodeIDFromString(id string) (NodeID, error) {
+	nid, err := strconv.ParseUint(id, util.Base10, 64)
+	if err != nil {
+		return 0, err
+	}
+
+	return NodeID(nid), nil
+}

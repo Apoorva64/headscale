@@ -197,7 +197,7 @@ tls_key_path: ""
 log:
   # Output formatting for logs: text or json
   format: text
-  level: info
+  level: debug
 
 # Path to a file containg ACL policies.
 # ACLs can be defined as YAML or HUJSON.

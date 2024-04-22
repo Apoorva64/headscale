@@ -164,6 +164,133 @@
         ]
       }
     },
+    "/api/v1/device/{id}": {
+      "get": {
+        "summary": "Implement Tailscale API",
+        "operationId": "HeadscaleService_GetDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HeadscaleService"
+        ]
+      },
+      "delete": {
+        "operationId": "HeadscaleService_DeleteDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HeadscaleService"
+        ]
+      }
+    },
+    "/api/v1/device/{id}/routes": {
+      "get": {
+        "operationId": "HeadscaleService_GetDeviceRoutes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDeviceRoutesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HeadscaleService"
+        ]
+      },
+      "post": {
+        "operationId": "HeadscaleService_EnableDeviceRoutes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1EnableDeviceRoutesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routes",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "HeadscaleService"
+        ]
+      }
+    },
     "/api/v1/node": {
       "get": {
         "operationId": "HeadscaleService_ListNodes",
@@ -927,6 +1054,55 @@
         }
       }
     },
+    "v1ClientConnectivity": {
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "derp": {
+          "type": "string"
+        },
+        "mappingVariesByDestIp": {
+          "type": "boolean"
+        },
+        "latency": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1Latency"
+          }
+        },
+        "clientSupports": {
+          "$ref": "#/definitions/v1ClientSupports"
+        }
+      }
+    },
+    "v1ClientSupports": {
+      "type": "object",
+      "properties": {
+        "hairPinning": {
+          "type": "boolean"
+        },
+        "ipv6": {
+          "type": "boolean"
+        },
+        "pcp": {
+          "type": "boolean"
+        },
+        "pmp": {
+          "type": "boolean"
+        },
+        "udp": {
+          "type": "boolean"
+        },
+        "upnp": {
+          "type": "boolean"
+        }
+      }
+    },
     "v1CreateApiKeyRequest": {
       "type": "object",
       "properties": {
@@ -1023,6 +1199,9 @@
     "v1DeleteApiKeyResponse": {
       "type": "object"
     },
+    "v1DeleteDeviceResponse": {
+      "type": "object"
+    },
     "v1DeleteNodeResponse": {
       "type": "object"
     },
@@ -1034,6 +1213,23 @@
     },
     "v1DisableRouteResponse": {
       "type": "object"
+    },
+    "v1EnableDeviceRoutesResponse": {
+      "type": "object",
+      "properties": {
+        "enabledRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advertisedRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "v1EnableRouteResponse": {
       "type": "object"
@@ -1070,6 +1266,100 @@
     },
     "v1ExpirePreAuthKeyResponse": {
       "type": "object"
+    },
+    "v1GetDeviceResponse": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "clientVersion": {
+          "type": "string"
+        },
+        "updateAvailable": {
+          "type": "boolean"
+        },
+        "os": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastSeen": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "keyExpiryDisabled": {
+          "type": "boolean"
+        },
+        "expires": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "authorized": {
+          "type": "boolean"
+        },
+        "isExternal": {
+          "type": "boolean"
+        },
+        "machineKey": {
+          "type": "string"
+        },
+        "nodeKey": {
+          "type": "string"
+        },
+        "blocksIncomingConnections": {
+          "type": "boolean"
+        },
+        "enabledRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advertisedRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "clientConnectivity": {
+          "$ref": "#/definitions/v1ClientConnectivity"
+        }
+      }
+    },
+    "v1GetDeviceRoutesResponse": {
+      "type": "object",
+      "properties": {
+        "enabledRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advertisedRoutes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "v1GetNodeResponse": {
       "type": "object",
@@ -1108,6 +1398,18 @@
       "properties": {
         "user": {
           "$ref": "#/definitions/v1User"
+        }
+      }
+    },
+    "v1Latency": {
+      "type": "object",
+      "properties": {
+        "latencyMs": {
+          "type": "number",
+          "format": "float"
+        },
+        "preferred": {
+          "type": "boolean"
         }
       }
     },
