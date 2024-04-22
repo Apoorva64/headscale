@@ -19,33 +19,37 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HeadscaleService_GetUser_FullMethodName          = "/headscale.v1.HeadscaleService/GetUser"
-	HeadscaleService_CreateUser_FullMethodName       = "/headscale.v1.HeadscaleService/CreateUser"
-	HeadscaleService_RenameUser_FullMethodName       = "/headscale.v1.HeadscaleService/RenameUser"
-	HeadscaleService_DeleteUser_FullMethodName       = "/headscale.v1.HeadscaleService/DeleteUser"
-	HeadscaleService_ListUsers_FullMethodName        = "/headscale.v1.HeadscaleService/ListUsers"
-	HeadscaleService_CreatePreAuthKey_FullMethodName = "/headscale.v1.HeadscaleService/CreatePreAuthKey"
-	HeadscaleService_ExpirePreAuthKey_FullMethodName = "/headscale.v1.HeadscaleService/ExpirePreAuthKey"
-	HeadscaleService_ListPreAuthKeys_FullMethodName  = "/headscale.v1.HeadscaleService/ListPreAuthKeys"
-	HeadscaleService_DebugCreateNode_FullMethodName  = "/headscale.v1.HeadscaleService/DebugCreateNode"
-	HeadscaleService_GetNode_FullMethodName          = "/headscale.v1.HeadscaleService/GetNode"
-	HeadscaleService_SetTags_FullMethodName          = "/headscale.v1.HeadscaleService/SetTags"
-	HeadscaleService_RegisterNode_FullMethodName     = "/headscale.v1.HeadscaleService/RegisterNode"
-	HeadscaleService_DeleteNode_FullMethodName       = "/headscale.v1.HeadscaleService/DeleteNode"
-	HeadscaleService_ExpireNode_FullMethodName       = "/headscale.v1.HeadscaleService/ExpireNode"
-	HeadscaleService_RenameNode_FullMethodName       = "/headscale.v1.HeadscaleService/RenameNode"
-	HeadscaleService_ListNodes_FullMethodName        = "/headscale.v1.HeadscaleService/ListNodes"
-	HeadscaleService_MoveNode_FullMethodName         = "/headscale.v1.HeadscaleService/MoveNode"
-	HeadscaleService_BackfillNodeIPs_FullMethodName  = "/headscale.v1.HeadscaleService/BackfillNodeIPs"
-	HeadscaleService_GetRoutes_FullMethodName        = "/headscale.v1.HeadscaleService/GetRoutes"
-	HeadscaleService_EnableRoute_FullMethodName      = "/headscale.v1.HeadscaleService/EnableRoute"
-	HeadscaleService_DisableRoute_FullMethodName     = "/headscale.v1.HeadscaleService/DisableRoute"
-	HeadscaleService_GetNodeRoutes_FullMethodName    = "/headscale.v1.HeadscaleService/GetNodeRoutes"
-	HeadscaleService_DeleteRoute_FullMethodName      = "/headscale.v1.HeadscaleService/DeleteRoute"
-	HeadscaleService_CreateApiKey_FullMethodName     = "/headscale.v1.HeadscaleService/CreateApiKey"
-	HeadscaleService_ExpireApiKey_FullMethodName     = "/headscale.v1.HeadscaleService/ExpireApiKey"
-	HeadscaleService_ListApiKeys_FullMethodName      = "/headscale.v1.HeadscaleService/ListApiKeys"
-	HeadscaleService_DeleteApiKey_FullMethodName     = "/headscale.v1.HeadscaleService/DeleteApiKey"
+	HeadscaleService_GetUser_FullMethodName            = "/headscale.v1.HeadscaleService/GetUser"
+	HeadscaleService_CreateUser_FullMethodName         = "/headscale.v1.HeadscaleService/CreateUser"
+	HeadscaleService_RenameUser_FullMethodName         = "/headscale.v1.HeadscaleService/RenameUser"
+	HeadscaleService_DeleteUser_FullMethodName         = "/headscale.v1.HeadscaleService/DeleteUser"
+	HeadscaleService_ListUsers_FullMethodName          = "/headscale.v1.HeadscaleService/ListUsers"
+	HeadscaleService_CreatePreAuthKey_FullMethodName   = "/headscale.v1.HeadscaleService/CreatePreAuthKey"
+	HeadscaleService_ExpirePreAuthKey_FullMethodName   = "/headscale.v1.HeadscaleService/ExpirePreAuthKey"
+	HeadscaleService_ListPreAuthKeys_FullMethodName    = "/headscale.v1.HeadscaleService/ListPreAuthKeys"
+	HeadscaleService_DebugCreateNode_FullMethodName    = "/headscale.v1.HeadscaleService/DebugCreateNode"
+	HeadscaleService_GetNode_FullMethodName            = "/headscale.v1.HeadscaleService/GetNode"
+	HeadscaleService_SetTags_FullMethodName            = "/headscale.v1.HeadscaleService/SetTags"
+	HeadscaleService_RegisterNode_FullMethodName       = "/headscale.v1.HeadscaleService/RegisterNode"
+	HeadscaleService_DeleteNode_FullMethodName         = "/headscale.v1.HeadscaleService/DeleteNode"
+	HeadscaleService_ExpireNode_FullMethodName         = "/headscale.v1.HeadscaleService/ExpireNode"
+	HeadscaleService_RenameNode_FullMethodName         = "/headscale.v1.HeadscaleService/RenameNode"
+	HeadscaleService_ListNodes_FullMethodName          = "/headscale.v1.HeadscaleService/ListNodes"
+	HeadscaleService_MoveNode_FullMethodName           = "/headscale.v1.HeadscaleService/MoveNode"
+	HeadscaleService_BackfillNodeIPs_FullMethodName    = "/headscale.v1.HeadscaleService/BackfillNodeIPs"
+	HeadscaleService_GetRoutes_FullMethodName          = "/headscale.v1.HeadscaleService/GetRoutes"
+	HeadscaleService_EnableRoute_FullMethodName        = "/headscale.v1.HeadscaleService/EnableRoute"
+	HeadscaleService_DisableRoute_FullMethodName       = "/headscale.v1.HeadscaleService/DisableRoute"
+	HeadscaleService_GetNodeRoutes_FullMethodName      = "/headscale.v1.HeadscaleService/GetNodeRoutes"
+	HeadscaleService_DeleteRoute_FullMethodName        = "/headscale.v1.HeadscaleService/DeleteRoute"
+	HeadscaleService_CreateApiKey_FullMethodName       = "/headscale.v1.HeadscaleService/CreateApiKey"
+	HeadscaleService_ExpireApiKey_FullMethodName       = "/headscale.v1.HeadscaleService/ExpireApiKey"
+	HeadscaleService_ListApiKeys_FullMethodName        = "/headscale.v1.HeadscaleService/ListApiKeys"
+	HeadscaleService_DeleteApiKey_FullMethodName       = "/headscale.v1.HeadscaleService/DeleteApiKey"
+	HeadscaleService_GetDevice_FullMethodName          = "/headscale.v1.HeadscaleService/GetDevice"
+	HeadscaleService_DeleteDevice_FullMethodName       = "/headscale.v1.HeadscaleService/DeleteDevice"
+	HeadscaleService_GetDeviceRoutes_FullMethodName    = "/headscale.v1.HeadscaleService/GetDeviceRoutes"
+	HeadscaleService_EnableDeviceRoutes_FullMethodName = "/headscale.v1.HeadscaleService/EnableDeviceRoutes"
 )
 
 // HeadscaleServiceClient is the client API for HeadscaleService service.
@@ -84,6 +88,11 @@ type HeadscaleServiceClient interface {
 	ExpireApiKey(ctx context.Context, in *ExpireApiKeyRequest, opts ...grpc.CallOption) (*ExpireApiKeyResponse, error)
 	ListApiKeys(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error)
 	DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error)
+	// Implement Tailscale API
+	GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error)
+	DeleteDevice(ctx context.Context, in *DeleteDeviceRequest, opts ...grpc.CallOption) (*DeleteDeviceResponse, error)
+	GetDeviceRoutes(ctx context.Context, in *GetDeviceRoutesRequest, opts ...grpc.CallOption) (*GetDeviceRoutesResponse, error)
+	EnableDeviceRoutes(ctx context.Context, in *EnableDeviceRoutesRequest, opts ...grpc.CallOption) (*EnableDeviceRoutesResponse, error)
 }
 
 type headscaleServiceClient struct {
@@ -337,6 +346,42 @@ func (c *headscaleServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApi
 	return out, nil
 }
 
+func (c *headscaleServiceClient) GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error) {
+	out := new(GetDeviceResponse)
+	err := c.cc.Invoke(ctx, HeadscaleService_GetDevice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *headscaleServiceClient) DeleteDevice(ctx context.Context, in *DeleteDeviceRequest, opts ...grpc.CallOption) (*DeleteDeviceResponse, error) {
+	out := new(DeleteDeviceResponse)
+	err := c.cc.Invoke(ctx, HeadscaleService_DeleteDevice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *headscaleServiceClient) GetDeviceRoutes(ctx context.Context, in *GetDeviceRoutesRequest, opts ...grpc.CallOption) (*GetDeviceRoutesResponse, error) {
+	out := new(GetDeviceRoutesResponse)
+	err := c.cc.Invoke(ctx, HeadscaleService_GetDeviceRoutes_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *headscaleServiceClient) EnableDeviceRoutes(ctx context.Context, in *EnableDeviceRoutesRequest, opts ...grpc.CallOption) (*EnableDeviceRoutesResponse, error) {
+	out := new(EnableDeviceRoutesResponse)
+	err := c.cc.Invoke(ctx, HeadscaleService_EnableDeviceRoutes_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HeadscaleServiceServer is the server API for HeadscaleService service.
 // All implementations must embed UnimplementedHeadscaleServiceServer
 // for forward compatibility
@@ -373,6 +418,11 @@ type HeadscaleServiceServer interface {
 	ExpireApiKey(context.Context, *ExpireApiKeyRequest) (*ExpireApiKeyResponse, error)
 	ListApiKeys(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error)
 	DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error)
+	// Implement Tailscale API
+	GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error)
+	DeleteDevice(context.Context, *DeleteDeviceRequest) (*DeleteDeviceResponse, error)
+	GetDeviceRoutes(context.Context, *GetDeviceRoutesRequest) (*GetDeviceRoutesResponse, error)
+	EnableDeviceRoutes(context.Context, *EnableDeviceRoutesRequest) (*EnableDeviceRoutesResponse, error)
 	mustEmbedUnimplementedHeadscaleServiceServer()
 }
 
@@ -460,6 +510,18 @@ func (UnimplementedHeadscaleServiceServer) ListApiKeys(context.Context, *ListApi
 }
 func (UnimplementedHeadscaleServiceServer) DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiKey not implemented")
+}
+func (UnimplementedHeadscaleServiceServer) GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDevice not implemented")
+}
+func (UnimplementedHeadscaleServiceServer) DeleteDevice(context.Context, *DeleteDeviceRequest) (*DeleteDeviceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDevice not implemented")
+}
+func (UnimplementedHeadscaleServiceServer) GetDeviceRoutes(context.Context, *GetDeviceRoutesRequest) (*GetDeviceRoutesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDeviceRoutes not implemented")
+}
+func (UnimplementedHeadscaleServiceServer) EnableDeviceRoutes(context.Context, *EnableDeviceRoutesRequest) (*EnableDeviceRoutesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableDeviceRoutes not implemented")
 }
 func (UnimplementedHeadscaleServiceServer) mustEmbedUnimplementedHeadscaleServiceServer() {}
 
@@ -960,6 +1022,78 @@ func _HeadscaleService_DeleteApiKey_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HeadscaleService_GetDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HeadscaleServiceServer).GetDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HeadscaleService_GetDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HeadscaleServiceServer).GetDevice(ctx, req.(*GetDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HeadscaleService_DeleteDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HeadscaleServiceServer).DeleteDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HeadscaleService_DeleteDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HeadscaleServiceServer).DeleteDevice(ctx, req.(*DeleteDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HeadscaleService_GetDeviceRoutes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDeviceRoutesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HeadscaleServiceServer).GetDeviceRoutes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HeadscaleService_GetDeviceRoutes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HeadscaleServiceServer).GetDeviceRoutes(ctx, req.(*GetDeviceRoutesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HeadscaleService_EnableDeviceRoutes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableDeviceRoutesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HeadscaleServiceServer).EnableDeviceRoutes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HeadscaleService_EnableDeviceRoutes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HeadscaleServiceServer).EnableDeviceRoutes(ctx, req.(*EnableDeviceRoutesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HeadscaleService_ServiceDesc is the grpc.ServiceDesc for HeadscaleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1074,6 +1208,22 @@ var HeadscaleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteApiKey",
 			Handler:    _HeadscaleService_DeleteApiKey_Handler,
+		},
+		{
+			MethodName: "GetDevice",
+			Handler:    _HeadscaleService_GetDevice_Handler,
+		},
+		{
+			MethodName: "DeleteDevice",
+			Handler:    _HeadscaleService_DeleteDevice_Handler,
+		},
+		{
+			MethodName: "GetDeviceRoutes",
+			Handler:    _HeadscaleService_GetDeviceRoutes_Handler,
+		},
+		{
+			MethodName: "EnableDeviceRoutes",
+			Handler:    _HeadscaleService_EnableDeviceRoutes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

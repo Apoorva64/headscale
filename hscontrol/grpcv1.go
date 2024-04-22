@@ -4,7 +4,10 @@ package hscontrol
 import (
 	"context"
 	"errors"
+	"fmt"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -234,6 +237,53 @@ func (api headscaleV1APIServer) GetNode(
 	resp.Online = api.h.nodeNotifier.IsConnected(node.ID)
 
 	return &v1.GetNodeResponse{Node: resp}, nil
+}
+
+func (api headscaleV1APIServer) GetDevice(
+	ctx context.Context,
+	request *v1.GetDeviceRequest,
+) (*v1.GetDeviceResponse, error) {
+
+	// convert id to number
+	id, err := types.NodeIDFromString(request.GetId())
+
+	node, err := api.h.db.GetNodeByID(id)
+	if err != nil {
+		return nil, err
+	}
+
+	// map node to device
+	device := nodeToDevice(node)
+
+	return device, nil
+}
+
+// function to convert a node to a device
+func nodeToDevice(node *types.Node) *v1.GetDeviceResponse {
+	device := &v1.GetDeviceResponse{
+		Addresses:                 []string{node.IPv6.String(), node.IPv4.String(), node.Hostname},
+		Id:                        strconv.FormatUint(uint64(node.ID), 10),
+		User:                      node.User.Name,
+		Name:                      node.GivenName,
+		Hostname:                  node.Hostname,
+		ClientVersion:             node.Hostinfo.App,
+		Os:                        node.Hostinfo.OS,
+		Created:                   timestamppb.New(node.CreatedAt),
+		LastSeen:                  timestamppb.New(*node.LastSeen),
+		KeyExpiryDisabled:         node.Expiry.IsZero(),
+		Expires:                   timestamppb.New(*node.Expiry),
+		Authorized:                node.AuthKey != nil,
+		MachineKey:                node.MachineKey.String(),
+		NodeKey:                   node.NodeKey.String(),
+		BlocksIncomingConnections: false,                    // This value needs to be fetched from the appropriate source
+		EnabledRoutes:             []string{},               // This value needs to be fetched from the appropriate source
+		AdvertisedRoutes:          []string{},               // This value needs to be fetched from the appropriate source
+		ClientConnectivity:        &v1.ClientConnectivity{}, // This value needs to be fetched from the appropriate source
+		UpdateAvailable:           false,                    // This value needs to be fetched from the appropriate source
+		IsExternal:                false,                    // This value needs to be fetched from the appropriate source
+	}
+
+	return device
 }
 
 func (api headscaleV1APIServer) SetTags(
