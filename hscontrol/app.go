@@ -225,7 +225,7 @@ func (h *Headscale) deleteExpireEphemeralNodes(milliSeconds int64) {
 	for range ticker.C {
 		var removed []types.NodeID
 		var changed []types.NodeID
-		if err := h.db.DB.Transaction(func(tx *gorm.DB) error {
+		if err := h.db.Write(func(tx *gorm.DB) error {
 			removed, changed = db.DeleteExpiredEphemeralNodes(tx, h.cfg.EphemeralNodeInactivityTimeout)
 
 			return nil
@@ -263,7 +263,7 @@ func (h *Headscale) expireExpiredMachines(intervalMs int64) {
 	var changed bool
 
 	for range ticker.C {
-		if err := h.db.DB.Transaction(func(tx *gorm.DB) error {
+		if err := h.db.Write(func(tx *gorm.DB) error {
 			lastCheck, update, changed = db.ExpireExpiredNodes(tx, lastCheck)
 
 			return nil
@@ -452,7 +452,7 @@ func (h *Headscale) ensureUnixSocketIsAbsent() error {
 
 func (h *Headscale) createRouter(grpcMux *grpcRuntime.ServeMux) *mux.Router {
 	router := mux.NewRouter()
-	router.PathPrefix("/debug/pprof/").Handler(http.DefaultServeMux)
+	router.Use(prometheusMiddleware)
 
 	router.HandleFunc(ts2021UpgradePath, h.NoiseUpgradeHandler).Methods(http.MethodPost)
 
@@ -508,7 +508,7 @@ func (h *Headscale) Serve() error {
 
 	// Fetch an initial DERP Map before we start serving
 	h.DERPMap = derp.GetDERPMap(h.cfg.DERP)
-	h.mapper = mapper.NewMapper(h.db, h.cfg, h.DERPMap, h.nodeNotifier.ConnectedMap())
+	h.mapper = mapper.NewMapper(h.db, h.cfg, h.DERPMap, h.nodeNotifier)
 
 	if h.cfg.DERP.ServerEnabled {
 		// When embedded DERP is enabled we always need a STUN server
@@ -680,7 +680,7 @@ func (h *Headscale) Serve() error {
 	// HTTP setup
 	//
 	// This is the regular router that we expose
-	// over our main Addr. It also serves the legacy Tailcale API
+	// over our main Addr
 	router := h.createRouter(grpcGatewayMux)
 
 	httpServer := &http.Server{
@@ -710,11 +710,10 @@ func (h *Headscale) Serve() error {
 		Msgf("listening and serving HTTP on: %s", h.cfg.Addr)
 
 	debugMux := http.NewServeMux()
+	debugMux.Handle("/debug/pprof/", http.DefaultServeMux)
 	debugMux.HandleFunc("/debug/notifier", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(h.nodeNotifier.String()))
-
-		return
 	})
 	debugMux.HandleFunc("/debug/mapresp", func(w http.ResponseWriter, r *http.Request) {
 		h.mapSessionMu.Lock()
@@ -728,8 +727,6 @@ func (h *Headscale) Serve() error {
 
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(b.String()))
-
-		return
 	})
 	debugMux.Handle("/metrics", promhttp.Handler())
 
